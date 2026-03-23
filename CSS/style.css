@@ -1,0 +1,207 @@
+/* =========================================
+   MIQRA SCHOOL - MAIN STYLESHEET
+   ========================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* 1. Tsarin jiki baki daya */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Tsarin bangaren sama (Hero Section) */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../Images/students_hall.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+/* 3. Tsarin Navigation Bar & Logo */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+/* Gyara don Logo ya yi kyau a cikin Navbar */
+.navbar-brand img {
+    border: 2px solid #ffc107; /* Kalar yellow din MIQRA */
+    background: white;
+    padding: 2px;
+}
+
+/* 4. Karamin tsarin section padding */
+.section-padding {
+    padding: 60px 0;
+}
+
+/* 5. Tsarin Footer na kasa */
+footer {
+    background-color: #222;
+    color: #bbb;
+    padding: 30px 0;
+    text-align: center;
+}
+
+/* 6. Sidebar da Social Links */
+.main-sidebar {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.s-link {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white !important;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+
+.s-link:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp { background-color: #25d366 !important; }
+.facebook { background-color: #1877f2 !important; }
+.tiktok   { background-color: #000000 !important; }
+.youtube  { background-color: #ff0000 !important; }
+
+/* 7. Back to Top Button */
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #ffc107;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#backToTop:hover {
+    background-color: #e0a800;
+}
+
+/* 8. Google Translate Styling */
+.goog-te-gadget-simple {
+    background-color: #ffffff !important;
+    border: 2px solid #ffc107 !important;
+    border-radius: 30px !important;
+    padding: 4px 12px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.goog-te-gadget-icon {
+    display: none !important;
+}
+
+.goog-te-menu-value span {
+    color: #198754 !important;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+/* 9. Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001; /* Ya fi kowane abu sama */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader {
+    text-align: center;
+}
+
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 10. Mobile Responsive & Form Fixes */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Gyara Date input don ya fi sauki a waya */
+    input[type="date"] {
+        position: relative;
+        min-height: 50px;
+        appearance: none;
+    }
+
+    /* Sanya alamar calendar ta fito a fili */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    #google_translate_element {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+}
