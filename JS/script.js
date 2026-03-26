@@ -1,17 +1,44 @@
 /* =========================================
-   MIQRA SCHOOL - MAIN JAVASCRIPT
+   MIQRA SCHOOL - MAIN JAVASCRIPT (FIXED)
    ========================================= */
 
-// 1. Back to Top Button Logic
-let mybutton = document.getElementById("backToTop");
+// 1. Dark Mode Logic (Ingantacce)
+document.addEventListener("DOMContentLoaded", function() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
 
-window.onscroll = function() {
-    scrollFunction();
-};
+    // A ringa amfani da wannan aikin domin canza icon
+    function updateIcon(isDark) {
+        if (!darkModeToggle) return;
+        if (isDark) {
+            darkModeToggle.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            darkModeToggle.classList.replace('fa-sun', 'fa-moon');
+        }
+    }
+
+    // Duba yanayin da ake ciki
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        updateIcon(true);
+    }
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateIcon(isDark);
+        });
+    }
+});
+
+// 2. Back to Top Button Logic
+let mybutton = document.getElementById("backToTop");
+window.onscroll = function() { scrollFunction(); };
 
 function scrollFunction() {
     if (mybutton) {
-        // Zai fito ne kawai idan mutum ya gangara kasa da pixel 300
         if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
             mybutton.style.display = "flex"; 
         } else {
@@ -20,44 +47,30 @@ function scrollFunction() {
     }
 }
 
-// Function din da zai mayar da mutum sama a hankali
 function topFunction() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Wannan ne yake sa tafiyar ta zama a hankali
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// 2. Form Submission (AJAX Redirect don Contact & Admission)
-// Wannan zai tura sako zuwa Formspree ba tare da an bar shafinka ba
+// 3. Form Submission (Contact & Admission)
 const contactForm = document.querySelector('form[action*="formspree"]');
-
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault(); 
-
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        
-        // Nuna wa mai amfani cewa sako yana kan hanya
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Ana turawa...';
-
         const data = new FormData(contactForm);
-        
         try {
             const response = await fetch(contactForm.action, {
                 method: 'POST',
                 body: data,
                 headers: { 'Accept': 'application/json' }
             });
-
             if (response.ok) {
-                // Nasara! Kai mutum shafin godiya
                 window.location.href = "thanks.html";
             } else {
-                alert("Akwai matsala wajen tura sakonku. Sake gwadawa nan gaba.");
+                alert("Akwai matsala. Sake gwadawa.");
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
@@ -69,56 +82,46 @@ if (contactForm) {
     });
 }
 
-
-// 3. Preloader Logic
+// 4. Preloader Logic
 window.addEventListener("load", function() {
     const preloader = document.getElementById("preloader");
     if (preloader) {
-        setTimeout(function() {
+        setTimeout(() => {
             preloader.style.opacity = "0";
             preloader.style.visibility = "hidden";
-            setTimeout(() => {
-                preloader.style.display = "none";
-            }, 500);
+            setTimeout(() => { preloader.style.display = "none"; }, 500);
         }, 600);
     }
 });
 
-
-// 4. Authentication & User Session Logic
+// 5. Authentication Logic
 document.addEventListener("DOMContentLoaded", function() {
     const greetingElement = document.getElementById("userGreeting");
     const currentUser = localStorage.getItem('currentUser');
-    
-    // Neman buttons na Login da Signup
-    const loginBtn = document.querySelector('a[href="login.html"]');
-    const signupBtn = document.querySelector('a[href="signup.html"]');
+    const authSection = document.getElementById('authSection');
+    const userSection = document.getElementById('userSection');
 
     if (currentUser) {
-        // 1. Nuna gaisuwa idan akwai inda aka tanada a HTML
         if (greetingElement) {
             greetingElement.innerHTML = `<i class="fas fa-user-circle me-1 text-warning"></i> Sannu, ${currentUser}`;
-            greetingElement.parentElement.classList.remove('d-none');
+            if (userSection) userSection.classList.remove('d-none');
+            if (authSection) authSection.classList.add('d-none');
         }
+    }
+});
 
-        // 2. Canja Login Button ya koma 'Logout'
-        if (loginBtn) {
-            loginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Fita';
-            loginBtn.classList.replace('btn-outline-warning', 'btn-outline-danger');
-            loginBtn.setAttribute("href", "#");
-            
-            loginBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if(confirm("Shin kana son fita daga account dinka?")) {
-                    localStorage.removeItem('currentUser');
-                    window.location.href = "index.html"; 
-                }
+// 6. Gyaran Privacy Policy Modal (Don hana shafin daskarewa)
+document.addEventListener("DOMContentLoaded", function() {
+    const privacyModalEl = document.getElementById('privacyModal');
+    if (privacyModalEl) {
+        // Muna amfani da Bootstrap data-attributes ne kawai don tsaro
+        // Idan kana son amfani da JS, kar ka sake kiran 'new bootstrap.Modal' a cikin click event
+        const privacyLinks = document.querySelectorAll('[data-bs-target="#privacyModal"]');
+        privacyLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Bari Bootstrap ta sarrafa kanta ta hanyar HTML attributes
+                console.log("Modal is opening...");
             });
-        }
-
-        // 3. Boye Signup Button tunda mutum ya riga ya shigo
-        if (signupBtn) {
-            signupBtn.style.display = "none";
-        }
+        });
     }
 });
