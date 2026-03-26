@@ -1,4 +1,4 @@
-// Wannan shi ne Algorithm din da zai adana bayanan rajista
+// --- 1. SASHE NA RAJISTA (SIGNUP) ---
 document.getElementById('signupForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -6,28 +6,53 @@ document.getElementById('signupForm')?.addEventListener('submit', function(e) {
     let contact = document.getElementById('userContact').value;
     let pass = document.getElementById('userPass').value;
 
-    // Adana bayanan a LocalStorage (Browser za ta rike su)
-    localStorage.setItem('savedUser', contact);
-    localStorage.setItem('savedPass', pass);
-    localStorage.setItem('savedName', name);
+    // Ɗauko tsofaffin ma'aikata/ɗalibai idan akwai, ko kuma samar da sabon jeri (Array)
+    let users = JSON.parse(localStorage.getItem('miqraUsers')) || [];
 
-    alert("Masha Allah " + name + ", Rajista ya yi nasara! Yanzu zaka iya shiga.");
-    window.location.href = "login.html"; // Zai kai ka shafin Login
+    // Dubawa ko riga an yi rajista da wannan Email/Number ɗin
+    let userExists = users.some(u => u.contact === contact);
+
+    if (userExists) {
+        alert("Wannan bayanan riga an yi rajista da su! Da fatan za a yi Login.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Adana sabon mai amfani a cikin jerinmu
+    users.push({
+        name: name,
+        contact: contact,
+        pass: pass
+    });
+
+    // Mayar da jerin zuwa LocalStorage
+    localStorage.setItem('miqraUsers', JSON.stringify(users));
+
+    alert("Masha Allah " + name + ", Rajista ya yi nasara! Yanzu za ka iya shiga.");
+    window.location.href = "login.html";
 });
-// Algorithm na dubawa idan mutum zai yi Login
+
+
+// --- 2. SASHE NA SHIGA (LOGIN) ---
 document.getElementById('loginForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    let user = document.getElementById('loginUser').value;
-    let pass = document.getElementById('password').value;
+    let userInp = document.getElementById('loginUser').value;
+    let passInp = document.getElementById('loginPass').value; // Na gyara wannan ID din ya dace da HTML dinka
 
-    let storedUser = localStorage.getItem('savedUser');
-    let storedPass = localStorage.getItem('savedPass');
+    // Ɗauko jerin dukkan wadanda suka yi rajista
+    let users = JSON.parse(localStorage.getItem('miqraUsers')) || [];
 
-    if (user === storedUser && pass === storedPass) {
-        alert("Barka da shigowa MIQRA SCHOOL!");
+    // Neman wanda bayanan sa suka dace (Contact da Password)
+    let authenticatedUser = users.find(u => u.contact === userInp && u.pass === passInp);
+
+    if (authenticatedUser) {
+        // Adana sunan wanda ya shiga (Session) don gaishe shi a Home Page
+        localStorage.setItem('currentUser', authenticatedUser.name);
+        
+        alert("Barka da shigowa MIQRA SCHOOL, " + authenticatedUser.name + "!");
         window.location.href = "index.html"; 
     } else {
-        alert("Kuskure! Bayanan nan ba su dace da wanda aka yi rajista da su ba.");
+        alert("Kuskure! Email/Lamba ko Password bai yi daidai ba.");
     }
 });

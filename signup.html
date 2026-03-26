@@ -4,34 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yi Rajista | MIQRA SCHOOL</title>
-    <link href="https://cdn.npm.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #198754 0%, #0d5a35 100%);
+            min-height: 100vh;
+        }
+        .signup-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: #ffffff;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+        }
+        .form-control:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+        .btn-signup {
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-signup:hover {
+            background-color: #ffc107;
+            color: #000;
+            border-color: #ffc107;
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card shadow-lg p-4 rounded-4" style="max-width: 400px; width: 100%;">
-            <div class="text-center mb-4">
-                <img src="Images/logo.png" width="70" alt="Logo">
-                <h3 class="fw-bold text-success mt-2">Sabon Rajista</h3>
+<body class="d-flex align-items-center py-5">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                
+                <div class="text-center mb-3">
+                    <a href="index.html" class="text-white text-decoration-none small opacity-75">
+                        <i class="fas fa-arrow-left me-1"></i> Koma Babban Shafin Gida
+                    </a>
+                </div>
+
+                <div class="card signup-card p-4">
+                    <div class="text-center mb-4">
+                        <img src="images/logo.png" width="70" height="70" alt="MIQRA Logo" class="rounded-circle shadow-sm bg-white p-1">
+                        <h3 class="fw-bold text-success mt-3">Sabon Rajista</h3>
+                        <p class="text-muted small">Buɗe account ɗinka don samun damar shiga portal</p>
+                    </div>
+
+                    <form id="signupForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Cikakken Suna</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-success"><i class="fas fa-user-tag"></i></span>
+                                <input type="text" id="fullName" class="form-control border-start-0" placeholder="Alhaji Khalid" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Email ko Lambar Waya</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-success"><i class="fas fa-envelope"></i></span>
+                                <input type="text" id="userContact" class="form-control border-start-0" placeholder="example@gmail.com" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-success"><i class="fas fa-lock"></i></span>
+                                <input type="password" id="userPass" class="form-control border-start-0" placeholder="********" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check small text-muted">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    Na yarda da dukkan <a href="#" class="text-success text-decoration-none">Dokokin Makarantar</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 btn-signup shadow-sm">Yi Rajista</button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="small mb-0">Kana da account riga? <a href="login.html" class="text-success fw-bold text-decoration-none border-bottom border-success">Shiga nan</a></p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4 text-white-50">
+                    <p class="small">© 2026 MIQRA Official Web Portal</p>
+                </div>
+
             </div>
-            <form id="signupForm">
-                <div class="mb-3">
-                    <label class="form-label">Cikakken Suna</label>
-                    <input type="text" id="fullName" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email ko Lambar Waya</label>
-                    <input type="text" id="userContact" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" id="userPass" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-success w-100 fw-bold">Yi Rajista</button>
-            </form>
-            <p class="text-center mt-3">Kana da account? <a href="login.html" class="text-success">Shiga nan</a></p>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/auth.js"></script>
 </body>
 </html>

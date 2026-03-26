@@ -6,13 +6,21 @@
     <meta name="description" content="MIQRA SCHOOL KANO - Cibiyar Ilimin Al-Qur'ani da na Zamani a Bompai, Kano.">
     <title>MIQRA Official Website | Bompai Kano</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Karamin ado don tabbatar da komai ya zauna daidai */
+        .navbar-brand img { transition: 0.3s; }
+        .navbar-brand:hover img { transform: rotate(10deg) scale(1.1); }
+        .carousel-item img { transition: transform 5s ease; }
+        .carousel-item.active img { transform: scale(1.1); }
+        #userGreeting { font-size: 0.9rem; border-left: 2px solid #ffc107; padding-left: 10px; }
+    </style>
 </head>
 <body class="bg-light">
 
     <div id="preloader">
-        <div class="loader">
+        <div class="loader text-center">
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
@@ -20,14 +28,14 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top border-bottom border-warning">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top border-bottom border-warning shadow">
         <div class="container">
             <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-                <img src="Images/logo.png" alt="MIQRA Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm bg-white p-1">
+                <img src="images/logo.png" alt="MIQRA Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm bg-white p-1">
                 <span class="d-none d-sm-inline">MIQRA SCHOOL</span>
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -37,8 +45,17 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="staff.html">Staff</a></li>
                     <li class="nav-item"><a class="nav-link" href="apply.html">Apply</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    
+                    <li class="nav-item ms-lg-3 d-flex align-items-center" id="authSection">
+                        <a class="btn btn-outline-warning btn-sm fw-bold me-2" href="login.html">Login</a>
+                        <a class="btn btn-warning btn-sm fw-bold text-dark" href="signup.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item d-none" id="userSection">
+                        <span class="nav-link text-white text-capitalize" id="userGreeting"></span>
+                    </li>
+
                     <li class="nav-item ms-lg-3 py-1">
                         <div id="google_translate_element" class="shadow-sm"></div>
                     </li>
@@ -55,35 +72,36 @@
 
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="Images/students_hall.jpg" class="d-block w-100" alt="Students Hall" style="height: 85vh; object-fit: cover; filter: brightness(60%);">
+          <img src="images/students_hall.jpg" class="d-block w-100" alt="Students Hall" style="height: 85vh; object-fit: cover; filter: brightness(50%);">
           <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
-            <div class="p-4 rounded shadow-lg">
-               <h1 class="display-3 fw-bold text-white mb-3">MIQRA SCHOOL KA</h1>
-               <p class="lead text-white-50 fs-4 mb-4">Cibiyar Bincike da Ci gaban Ilimin Al-Qur'ani</p>
-               <a href="apply.html" class="btn btn-warning btn-lg px-5 fw-bold rounded-pill text-uppercase shadow">Apply Now</a>
+            <div class="p-4 rounded">
+               <h1 class="display-3 fw-bold text-white mb-3 text-uppercase">MIQRA SCHOOL KANO</h1>
+               <p class="lead text-white-50 fs-4 mb-4">Cibiyar Bincike da Ci gaban Ilimin Al-Qur'ani da na Zamani</p>
+               <div class="d-flex gap-3">
+                   <a href="signup.html" class="btn btn-warning btn-lg px-5 fw-bold rounded-pill text-uppercase shadow">Fara Rajista</a>
+                   <a href="contact.html" class="btn btn-outline-light btn-lg px-5 fw-bold rounded-pill text-uppercase shadow">Tuntube Mu</a>
+               </div>
             </div>
           </div>
         </div>
         
         <div class="carousel-item">
-          <img src="Images/student_study.jpg" class="d-block w-100" alt="Student Studying" style="height: 85vh; object-fit: cover; filter: brightness(60%);">
+          <img src="images/student_study.jpg" class="d-block w-100" alt="Student Studying" style="height: 85vh; object-fit: cover; filter: brightness(50%);">
           <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
-            <div class="p-4 rounded">
+            <div class="p-4 rounded text-center">
                <h2 class="display-3 fw-bold text-white mb-3">Ingantaccen Ilimi</h2>
-               <p class="lead text-white-50 fs-4 mb-4">Haɗa Ilimin Addini da na Zamani</p>
-               <a href="about.html" class="btn btn-success btn-lg px-5 fw-bold rounded-pill text-uppercase shadow">Learn More</a>
+               <p class="lead text-white-50 fs-4 mb-4">Muna haɗa Ilimin Addini, Tarbiyya da Fasahar Zamani</p>
+               <a href="about.html" class="btn btn-success btn-lg px-5 fw-bold rounded-pill text-uppercase shadow">Karin Bayani</a>
             </div>
           </div>
         </div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#schoolCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="carousel-control-prev-icon"></span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#schoolCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="carousel-control-next-icon"></span>
       </button>
     </section>
 
@@ -94,57 +112,58 @@
         </div>
         <div class="row g-4 text-center">
             <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 rounded-4">
+                <div class="card h-100 border-0 shadow-sm p-4 rounded-4 transition-hover">
                     <i class="fas fa-quran fa-4x text-success mb-3"></i>
                     <h4 class="fw-bold text-success">Tahfizul Qur'an</h4>
-                    <p class="text-muted">Haddace Al-Qur'ani mai girma tare da kiyaye ƙa'idodin tajwidi.</p>
+                    <p class="text-muted">Haddace Al-Qur'ani mai girma tare da kiyaye ƙa'idodin tajwidi da koyon tafsiri.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card h-100 border-0 shadow p-4 rounded-4 border-top border-5 border-success">
+                <div class="card h-100 border-0 shadow p-4 rounded-4 border-top border-5 border-success transition-hover">
                     <i class="fas fa-laptop-code fa-4x text-success mb-3"></i>
                     <h4 class="fw-bold text-success">Computer Science</h4>
-                    <p class="text-muted">Koyar da Programming (Python, Web Dev) da sauran dabarun fasahar zamani.</p>
+                    <p class="text-muted">Koyar da Programming (Python, Web Dev), Cybersecurity da dabarun fasahar zamani.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 rounded-4">
+                <div class="card h-100 border-0 shadow-sm p-4 rounded-4 transition-hover">
                     <i class="fas fa-mosque fa-4x text-success mb-3"></i>
                     <h4 class="fw-bold text-success">Tarbiyya</h4>
-                    <p class="text-muted">Ginin halayyar ɗalibai bisa tsarin koyarwar musulunci na kwarai.</p>
+                    <p class="text-muted">Ginin halayyar ɗalibai bisa tsarin koyarwar musulunci da kishin kasa.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer class="bg-dark text-white text-center p-4">
-    <p class="mb-1 small opacity-75">© 2026 MIQRA Official Website. Bompai Rd, Kano 700213.</p>
-    <p class="mb-0 small opacity-50">
-        <a href="#" class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
-    </p>
-</footer>
+        <p class="mb-1 small opacity-75">© 2026 MIQRA Official Website. Bompai Rd, Kano 700213.</p>
+        <p class="mb-0 small opacity-50">
+            <a href="#" class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a> | 
+            <a href="staff.html" class="text-white text-decoration-none">Staff Portal</a>
+        </p>
+    </footer>
 
-<div class="modal fade text-dark" id="privacyModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title">Sirrin Masu Amfani (Privacy Policy)</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body text-start">
-                <p><strong>MIQRA SCHOOL KANO</strong> tana mutunta sirrin ku:</p>
-                <ul>
-                    <li>Ana adana bayanan ku ne kawai don buƙatun makaranta.</li>
-                    <li>Ba a raba lambobin waya ko imel da wasu kamfanoni.</li>
-                    <li>Kuna da damar neman a goge bayanan ku idan ba ku buƙata.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Na Gane</button>
+    <div class="modal fade text-dark" id="privacyModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-user-shield me-2"></i> Sirrin Masu Amfani</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-start">
+                    <p><strong>MIQRA SCHOOL KANO</strong> tana mutunta sirrin ku:</p>
+                    <ul class="list-group list-group-flush small">
+                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Ana adana bayanan ku ne kawai don buƙatun makaranta.</li>
+                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Ba a raba lambobin waya ko imel da kowa.</li>
+                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Kuna da damar neman a goge bayanan ku kowane lokaci.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success px-4 rounded-pill" data-bs-dismiss="modal">Na Gane</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <div class="main-sidebar">
         <a href="https://wa.me/2347077127827" class="s-link whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -158,19 +177,33 @@
     </button>
 
     <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ha', 
-        includedLanguages: 'en,ha,ar,zh-CN,fr,hi', 
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ha', 
+                includedLanguages: 'en,ha,ar,zh-CN,fr,hi', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Logic don gaishe da wanda ya yi Login
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            const authSection = document.getElementById('authSection');
+            const userSection = document.getElementById('userSection');
+            const userGreeting = document.getElementById('userGreeting');
+
+            if (currentUser) {
+                authSection.classList.add('d-none');
+                userSection.classList.remove('d-none');
+                userGreeting.innerHTML = `<i class="fas fa-user-circle me-1 text-warning"></i> Sannu, ${currentUser}`;
+            }
+        });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="JS/script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 </html>
