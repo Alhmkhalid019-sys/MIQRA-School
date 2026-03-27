@@ -7,6 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        #userGreeting { font-size: 0.9rem; border-left: 2px solid #ffc107; padding-left: 10px; }
+        #darkModeToggle { cursor: pointer; color: #ffc107; display: flex; align-items: center; }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -15,18 +19,18 @@
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <p class="mt-2 fw-bold text-success">MIQRA SCHOOL...</p>
+            <p class="mt-2 fw-bold text-success text-uppercase">MIQRA SCHOOL...</p>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top border-bottom border-warning">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top border-bottom border-warning shadow">
         <div class="container">
             <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
                 <img src="images/logo.png" alt="MIQRA Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm bg-white p-1">
                 <span class="d-none d-sm-inline">MIQRA SCHOOL</span>
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -34,13 +38,23 @@
                 <ul class="navbar-nav ms-auto align-items-center text-uppercase small fw-bold">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="admission.html">Admission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
                     <li class="nav-item"><a class="nav-link active" href="apply.html">Apply</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item ms-lg-2"><a class="btn btn-outline-warning btn-sm fw-bold" href="login.html">Login</a></li>
-                    <li class="nav-item ms-lg-1"><a class="btn btn-warning btn-sm fw-bold text-dark" href="signup.html">Sign Up</a></li>
-                    <li class="nav-item ms-lg-3 py-1">
-                        <div id="google_translate_element" class="shadow-sm"></div>
+                    
+                    <li class="nav-item ms-lg-3 d-flex align-items-center" id="authSection">
+                        <a class="btn btn-outline-warning btn-sm fw-bold me-2" href="login.html">Login</a>
+                        <a class="btn btn-warning btn-sm fw-bold text-dark" href="signup.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item d-none" id="userSection">
+                        <span class="nav-link text-white text-capitalize" id="userGreeting"></span>
+                    </li>
+
+                    <li class="nav-item ms-lg-3 py-1 d-flex align-items-center gap-3">
+                        <div id="google_translate_element"></div>
+                        <div id="darkModeToggle">
+                            <i class="fas fa-moon" id="darkIcon"></i>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -61,9 +75,13 @@
                             
                             <h5 class="text-success border-bottom pb-2 mb-4 fw-bold text-uppercase small">Bayanan Dalibai</h5>
                             <div class="row g-3 mb-4">
-                                <div class="col-md-12">
-                                    <label class="form-label fw-bold small text-muted">Cikakken Suna (Full Name)</label>
-                                    <input type="text" name="Suna" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Saka sunan dalibi a nan" required>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted">Sunan Fari (First Name)</label>
+                                    <input type="text" name="First_Name" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Misali: Khalid" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted">Sunan Mahaifi (Last Name)</label>
+                                    <input type="text" name="Last_Name" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Misali: Muhammad" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-muted">Jinsi (Gender)</label>
@@ -74,8 +92,12 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold small text-muted">Ranar Haihuwa</label>
-                                    <input type="date" name="Ranar_Haihuwa" class="form-control form-control-lg shadow-sm border-0 bg-light" required>
+                                    <label class="form-label fw-bold small text-muted">Ranar Haihuwa (Type: DD/MM/YYYY)</label>
+                                    <input type="text" name="Ranar_Haihuwa" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="01/12/2005" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold small text-muted">Lambar NIN (National Identity Number)</label>
+                                    <input type="number" name="NIN_Number" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Saka lambobi 11 na NIN dinka" required>
                                 </div>
                             </div>
 
@@ -94,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="text-success border-bottom pb-2 mb-4 fw-bold text-uppercase small">Bayanin lura / Lambar Sadarwa</h5>
+                            <h5 class="text-success border-bottom pb-2 mb-4 fw-bold text-uppercase small">Lambar Sadarwa</h5>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-muted">Lambar Waya (Parent Phone)</label>
@@ -129,23 +151,22 @@
         </p>
     </footer>
 
-    <div class="modal fade text-dark" id="privacyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade text-dark" id="privacyModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content shadow-lg border-0 rounded-4">
                 <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title">Sirrin Masu Amfani (Privacy Policy)</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title fw-bold"><i class="fas fa-user-shield me-2"></i> Sirrin Masu Amfani</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-start">
                     <p><strong>MIQRA SCHOOL KANO</strong> tana mutunta sirrin ku:</p>
-                    <ul>
-                        <li>Ana adana bayanan ku ne kawai don buƙatun makaranta.</li>
-                        <li>Ba a raba lambobin waya ko imel da wasu kamfanoni.</li>
-                        <li>Kuna da damar neman a goge bayanan ku idan ba ku buƙata.</li>
+                    <ul class="list-group list-group-flush small">
+                        <li class="list-group-item">Ana adana bayanan ku ne kawai don buƙatun makaranta.</li>
+                        <li class="list-group-item">Ba a raba NIN ko lambobin waya da kowa.</li>
                     </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Na Gane</button>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-success px-4 rounded-pill" data-bs-dismiss="modal">Na Gane</button>
                 </div>
             </div>
         </div>
@@ -163,19 +184,17 @@
     </button>
 
     <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ha', 
-        includedLanguages: 'en,ha,ar,zh-CN,fr,hi', 
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ha', 
+                includedLanguages: 'en,ha,ar,zh-CN,fr,hi', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
-
 </body>
 </html>
