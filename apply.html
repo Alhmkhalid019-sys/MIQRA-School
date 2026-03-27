@@ -10,6 +10,9 @@
     <style>
         #userGreeting { font-size: 0.9rem; border-left: 2px solid #ffc107; padding-left: 10px; }
         #darkModeToggle { cursor: pointer; color: #ffc107; display: flex; align-items: center; }
+        /* Karamin gyara don boye kibiyoyin lamba a wasu browser din */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body class="bg-light">
@@ -92,12 +95,15 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold small text-muted">Ranar Haihuwa (Type: DD/MM/YYYY)</label>
-                                    <input type="text" name="Ranar_Haihuwa" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="01/12/2005" required>
+                                    <label class="form-label fw-bold small text-muted">Ranar Haihuwa (Lamba Kawai: DD/MM/YYYY)</label>
+                                    <input type="text" name="Ranar_Haihuwa" class="form-control form-control-lg shadow-sm border-0 bg-light" 
+                                           placeholder="01/12/2005" inputmode="numeric" pattern="[0-9/]*" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold small text-muted">Lambar NIN (National Identity Number)</label>
-                                    <input type="number" name="NIN_Number" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Saka lambobi 11 na NIN dinka" required>
+                                    <label class="form-label fw-bold small text-muted">Lambar NIN (National Identity Number - Lamba 11)</label>
+                                    <input type="text" name="NIN_Number" class="form-control form-control-lg shadow-sm border-0 bg-light" 
+                                           placeholder="Saka lambobi 11 na NIN dinka" inputmode="numeric" pattern="[0-9]{11}" maxlength="11" 
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" required>
                                 </div>
                             </div>
 
