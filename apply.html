@@ -10,7 +10,6 @@
     <style>
         #userGreeting { font-size: 0.9rem; border-left: 2px solid #ffc107; padding-left: 10px; }
         #darkModeToggle { cursor: pointer; color: #ffc107; display: flex; align-items: center; }
-        /* Karamin gyara don boye kibiyoyin lamba a wasu browser din */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
@@ -96,8 +95,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-muted">Ranar Haihuwa (Lamba Kawai: DD/MM/YYYY)</label>
-                                    <input type="text" name="Ranar_Haihuwa" class="form-control form-control-lg shadow-sm border-0 bg-light" 
-                                           placeholder="01/12/2005" inputmode="numeric" pattern="[0-9/]*" required>
+                                    <input type="text" name="Ranar_Haihuwa" id="dob" class="form-control form-control-lg shadow-sm border-0 bg-light" 
+                                           placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" required
+                                           oninput="formatDate(this)">
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-muted">Lambar NIN (National Identity Number - Lamba 11)</label>
@@ -188,6 +188,27 @@
     <button onclick="topFunction()" id="backToTop" title="Koma Sama">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <script>
+        function formatDate(input) {
+            // Cire duk abinda ba lamba ba
+            let value = input.value.replace(/\D/g, '');
+            let formattedValue = '';
+
+            if (value.length > 0) {
+                // Saka slash bayan rana (DD)
+                formattedValue += value.substring(0, 2);
+                if (value.length >= 3) {
+                    formattedValue += '/' + value.substring(2, 4);
+                }
+                // Saka slash bayan wata (MM)
+                if (value.length >= 5) {
+                    formattedValue += '/' + value.substring(4, 8);
+                }
+            }
+            input.value = formattedValue;
+        }
+    </script>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
