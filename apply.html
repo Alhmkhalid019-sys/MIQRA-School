@@ -31,11 +31,9 @@
                 <img src="images/logo.png" alt="MIQRA Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm bg-white p-1">
                 <span class="d-none d-sm-inline">MIQRA SCHOOL</span>
             </a>
-            
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center text-uppercase small fw-bold">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
@@ -43,7 +41,6 @@
                     <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
                     <li class="nav-item"><a class="nav-link active" href="apply.html">Apply</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    
                     <li class="nav-item ms-lg-3 d-flex align-items-center" id="authSection">
                         <a class="btn btn-outline-warning btn-sm fw-bold me-2" href="login.html">Login</a>
                         <a class="btn btn-warning btn-sm fw-bold text-dark" href="signup.html">Sign Up</a>
@@ -51,7 +48,6 @@
                     <li class="nav-item d-none" id="userSection">
                         <span class="nav-link text-white text-capitalize" id="userGreeting"></span>
                     </li>
-
                     <li class="nav-item ms-lg-3 py-1 d-flex align-items-center gap-3">
                         <div id="google_translate_element"></div>
                         <div id="darkModeToggle">
@@ -77,13 +73,9 @@
                             
                             <h5 class="text-success border-bottom pb-2 mb-4 fw-bold text-uppercase small">Bayanan Dalibai</h5>
                             <div class="row g-3 mb-4">
-                                <div class="col-md-6">
-                                    <label class="form-label fw-bold small text-muted">Sunan Fari (First Name)</label>
-                                    <input type="text" name="First_Name" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Misali: Khalid" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-bold small text-muted">Sunan Mahaifi (Last Name)</label>
-                                    <input type="text" name="Last_Name" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Misali: Muhammad" required>
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold small text-muted">Cikakken Suna (Full Name)</label>
+                                    <input type="text" name="Full_Name" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="Saka cikakken sunan dalibi a nan" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-muted">Jinsi (Gender)</label>
@@ -94,15 +86,14 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold small text-muted">Ranar Haihuwa (Lamba Kawai: DD/MM/YYYY)</label>
+                                    <label class="form-label fw-bold small text-muted">Ranar Haihuwa (DD/MM/YYYY)</label>
                                     <input type="text" name="Ranar_Haihuwa" id="dob" class="form-control form-control-lg shadow-sm border-0 bg-light" 
-                                           placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" required
-                                           oninput="formatDate(this)">
+                                           placeholder="DD/MM/YYYY" maxlength="10" inputmode="numeric" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold small text-muted">Lambar NIN (National Identity Number - Lamba 11)</label>
+                                    <label class="form-label fw-bold small text-muted">Lambar NIN (Lamba 11)</label>
                                     <input type="text" name="NIN_Number" class="form-control form-control-lg shadow-sm border-0 bg-light" 
-                                           placeholder="Saka lambobi 11 na NIN dinka" inputmode="numeric" pattern="[0-9]{11}" maxlength="11" 
+                                           placeholder="Saka lambobi 11 na NIN dinka" maxlength="11" inputmode="numeric"
                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" required>
                                 </div>
                             </div>
@@ -126,7 +117,8 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-muted">Lambar Waya (Parent Phone)</label>
-                                    <input type="tel" name="Lambar_Waya" class="form-control form-control-lg shadow-sm border-0 bg-light" placeholder="080..." required>
+                                    <input type="tel" name="Lambar_Waya" class="form-control form-control-lg shadow-sm border-0 bg-light" 
+                                           placeholder="+234..." maxlength="15" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-muted">Email (Optional)</label>
@@ -189,28 +181,19 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script>
-        function formatDate(input) {
-            // Cire duk abinda ba lamba ba
-            let value = input.value.replace(/\D/g, '');
-            let formattedValue = '';
-
-            if (value.length > 0) {
-                // Saka slash bayan rana (DD)
-                formattedValue += value.substring(0, 2);
-                if (value.length >= 3) {
-                    formattedValue += '/' + value.substring(2, 4);
-                }
-                // Saka slash bayan wata (MM)
-                if (value.length >= 5) {
-                    formattedValue += '/' + value.substring(4, 8);
-                }
-            }
-            input.value = formattedValue;
-        }
-    </script>
-
     <script type="text/javascript">
+        // Auto-slash da hana haruffa a Date of Birth
+        const dobInput = document.getElementById('dob');
+        dobInput.addEventListener('input', function(e) {
+            let v = e.target.value.replace(/[^0-9]/g, '');
+            if (v.length > 2 && v.length <= 4) {
+                v = v.slice(0, 2) + '/' + v.slice(2);
+            } else if (v.length > 4) {
+                v = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4, 8);
+            }
+            e.target.value = v;
+        });
+
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'ha', 
