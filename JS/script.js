@@ -1,28 +1,32 @@
 /* =========================================
-   MIQRA SCHOOL - MAIN JAVASCRIPT (FIXED)
+   MIQRA SCHOOL - ALL-IN-ONE MASTER SCRIPT
    ========================================= */
 
-// 1. Dark Mode Logic (Ingantacce)
+// 1. DARK MODE & UI LOGIC
 document.addEventListener("DOMContentLoaded", function() {
-    const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkIcon = document.getElementById('darkIcon');
 
-    // A ringa amfani da wannan aikin domin canza icon
+    // Aikace-aikacen canza Icon
     function updateIcon(isDark) {
-        if (!darkModeToggle) return;
+        if (!darkIcon) return;
         if (isDark) {
-            darkModeToggle.classList.replace('fa-moon', 'fa-sun');
+            darkIcon.classList.remove('fa-moon');
+            darkIcon.classList.add('fa-sun');
         } else {
-            darkModeToggle.classList.replace('fa-sun', 'fa-moon');
+            darkIcon.classList.remove('fa-sun');
+            darkIcon.classList.add('fa-moon');
         }
     }
 
-    // Duba yanayin da ake ciki
+    // Duba yanayin da aka adana (Theme Persistence)
     if (localStorage.getItem('theme') === 'dark') {
         body.classList.add('dark-mode');
         updateIcon(true);
     }
 
+    // Toggle Dark Mode lokacin da aka danna
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
@@ -31,13 +35,77 @@ document.addEventListener("DOMContentLoaded", function() {
             updateIcon(isDark);
         });
     }
+
+    // 2. AUTHENTICATION (Haɗe daga auth.js)
+    const signupForm = document.getElementById('signupForm');
+    const loginForm = document.getElementById('loginForm');
+    const greetingElement = document.getElementById("userGreeting");
+    const authSection = document.getElementById('authSection');
+    const userSection = document.getElementById('userSection');
+    const currentUser = localStorage.getItem('currentUser');
+
+    // Duba idan mutum ya riga ya yi Login
+    if (currentUser && greetingElement) {
+        greetingElement.innerHTML = `<i class="fas fa-user-circle me-1 text-warning"></i> Sannu, ${currentUser}`;
+        if (userSection) userSection.classList.remove('d-none');
+        if (authSection) authSection.classList.add('d-none');
+    }
+
+    // Signup Logic
+    if (signupForm) {
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let name = document.getElementById('fullName').value;
+            let contact = document.getElementById('userContact').value;
+            let pass = document.getElementById('userPass').value;
+
+            let users = JSON.parse(localStorage.getItem('miqraUsers')) || [];
+            if (users.some(u => u.contact === contact)) {
+                alert("Wannan bayanan riga an yi rajista! Da fatan za a yi Login.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            users.push({ name, contact, pass });
+            localStorage.setItem('miqraUsers', JSON.stringify(users));
+            alert("Masha Allah " + name + ", Rajista ya yi nasara!");
+            window.location.href = "login.html";
+        });
+    }
+
+    // Login Logic
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let userInp = document.getElementById('loginUser').value;
+            let passInp = document.getElementById('loginPass').value;
+
+            let users = JSON.parse(localStorage.getItem('miqraUsers')) || [];
+            let authenticatedUser = users.find(u => u.contact === userInp && u.pass === passInp);
+
+            if (authenticatedUser) {
+                localStorage.setItem('currentUser', authenticatedUser.name);
+                alert("Barka da shigowa, " + authenticatedUser.name + "!");
+                window.location.href = "index.html"; 
+            } else {
+                alert("Kuskure! Email/Lamba ko Password bai yi daidai ba.");
+            }
+        });
+    }
+
+    // 3. PRIVACY MODAL LOGIC
+    const privacyModalEl = document.getElementById('privacyModal');
+    if (privacyModalEl) {
+        const privacyLinks = document.querySelectorAll('[data-bs-target="#privacyModal"]');
+        privacyLinks.forEach(link => {
+            link.addEventListener('click', () => console.log("Modal opening..."));
+        });
+    }
 });
 
-// 2. Back to Top Button Logic
+// 4. BACK TO TOP BUTTON
 let mybutton = document.getElementById("backToTop");
-window.onscroll = function() { scrollFunction(); };
-
-function scrollFunction() {
+window.onscroll = function() {
     if (mybutton) {
         if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
             mybutton.style.display = "flex"; 
@@ -45,13 +113,25 @@ function scrollFunction() {
             mybutton.style.display = "none";
         }
     }
-}
+};
 
 function topFunction() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 3. Form Submission (Contact & Admission)
+// 5. PRELOADER LOGIC
+window.addEventListener("load", function() {
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+        setTimeout(() => {
+            preloader.style.opacity = "0";
+            preloader.style.visibility = "hidden";
+            setTimeout(() => { preloader.style.display = "none"; }, 500);
+        }, 600);
+    }
+});
+
+// 6. FORM SUBMISSION (Formspree)
 const contactForm = document.querySelector('form[action*="formspree"]');
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
@@ -81,47 +161,3 @@ if (contactForm) {
         }
     });
 }
-
-// 4. Preloader Logic
-window.addEventListener("load", function() {
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-        setTimeout(() => {
-            preloader.style.opacity = "0";
-            preloader.style.visibility = "hidden";
-            setTimeout(() => { preloader.style.display = "none"; }, 500);
-        }, 600);
-    }
-});
-
-// 5. Authentication Logic
-document.addEventListener("DOMContentLoaded", function() {
-    const greetingElement = document.getElementById("userGreeting");
-    const currentUser = localStorage.getItem('currentUser');
-    const authSection = document.getElementById('authSection');
-    const userSection = document.getElementById('userSection');
-
-    if (currentUser) {
-        if (greetingElement) {
-            greetingElement.innerHTML = `<i class="fas fa-user-circle me-1 text-warning"></i> Sannu, ${currentUser}`;
-            if (userSection) userSection.classList.remove('d-none');
-            if (authSection) authSection.classList.add('d-none');
-        }
-    }
-});
-
-// 6. Gyaran Privacy Policy Modal (Don hana shafin daskarewa)
-document.addEventListener("DOMContentLoaded", function() {
-    const privacyModalEl = document.getElementById('privacyModal');
-    if (privacyModalEl) {
-        // Muna amfani da Bootstrap data-attributes ne kawai don tsaro
-        // Idan kana son amfani da JS, kar ka sake kiran 'new bootstrap.Modal' a cikin click event
-        const privacyLinks = document.querySelectorAll('[data-bs-target="#privacyModal"]');
-        privacyLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Bari Bootstrap ta sarrafa kanta ta hanyar HTML attributes
-                console.log("Modal is opening...");
-            });
-        });
-    }
-});

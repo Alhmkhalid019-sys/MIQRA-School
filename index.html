@@ -21,19 +21,24 @@
             background-color: #121212 !important;
             color: #e0e0e0 !important;
         }
-        .dark-mode .card, .dark-mode .modal-content {
+        body.dark-mode .card, body.dark-mode .modal-content {
             background-color: #1e1e1e !important;
             color: white !important;
-            border: 1px solid #333;
+            border: 1px solid #444 !important;
         }
-        .dark-mode .text-muted { color: #bbb !important; }
-        .dark-mode .bg-light { background-color: #121212 !important; }
+        body.dark-mode .navbar {
+            background-color: #0a3d0a !important; 
+        }
+        body.dark-mode .text-muted { color: #bbb !important; }
+        body.dark-mode .bg-light { background-color: #121212 !important; }
         
         #darkModeToggle {
             cursor: pointer;
             font-size: 1.2rem;
             color: #ffc107;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
@@ -78,7 +83,7 @@
 
                     <li class="nav-item ms-lg-3 py-1 d-flex align-items-center gap-3">
                         <div id="google_translate_element" class="shadow-sm"></div>
-                        <div id="darkModeToggle" onclick="toggleDarkMode()">
+                        <div id="darkModeToggle">
                             <i class="fas fa-moon" id="darkIcon"></i>
                         </div>
                     </li>
@@ -208,46 +213,10 @@
                 autoDisplay: false
             }, 'google_translate_element');
         }
-
-        // DARK MODE LOGIC
-        function toggleDarkMode() {
-            const body = document.body;
-            const icon = document.getElementById('darkIcon');
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                document.getElementById('darkIcon').classList.replace('fa-moon', 'fa-sun');
-            }
-
-            const currentUser = localStorage.getItem('currentUser');
-            const authSection = document.getElementById('authSection');
-            const userSection = document.getElementById('userSection');
-            const userGreeting = document.getElementById('userGreeting');
-
-            if (currentUser) {
-                authSection.classList.add('d-none');
-                userSection.classList.remove('d-none');
-                userGreeting.innerHTML = `<i class="fas fa-user-circle me-1 text-warning"></i> Sannu, ${currentUser}`;
-            }
-        });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/auth.js"></script>
-
 </body>
 </html>
